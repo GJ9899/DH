@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.dh.hotel.mapper.HotelOrderMapper">
+  <resultMap id="BaseResultMap" type="org.dh.hotel.entity.entity.HotelOrder">
+    <constructor>
+      <idArg column="id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="user_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="order_note" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="created_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <arg column="room_type_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="room_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="check_in_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <arg column="order_state" javaType="java.lang.String" jdbcType="VARCHAR" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, user_id, order_note, created_time, room_type_id, room_id, check_in_time, order_state
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from hotel_order
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from hotel_order
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="org.dh.hotel.entity.entity.HotelOrder">
+    insert into hotel_order (id, user_id, order_note, 
+      created_time, room_type_id, room_id, 
+      check_in_time, order_state)
+    values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{orderNote,jdbcType=VARCHAR}, 
+      #{createdTime,jdbcType=TIMESTAMP}, #{roomTypeId,jdbcType=INTEGER}, #{roomId,jdbcType=INTEGER}, 
+      #{checkInTime,jdbcType=TIMESTAMP}, #{orderState,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="org.dh.hotel.entity.entity.HotelOrder">
+    insert into hotel_order
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="orderNote != null">
+        order_note,
+      </if>
+      <if test="createdTime != null">
+        created_time,
+      </if>
+      <if test="roomTypeId != null">
+        room_type_id,
+      </if>
+      <if test="roomId != null">
+        room_id,
+      </if>
+      <if test="checkInTime != null">
+        check_in_time,
+      </if>
+      <if test="orderState != null">
+        order_state,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="orderNote != null">
+        #{orderNote,jdbcType=VARCHAR},
+      </if>
+      <if test="createdTime != null">
+        #{createdTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="roomTypeId != null">
+        #{roomTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="roomId != null">
+        #{roomId,jdbcType=INTEGER},
+      </if>
+      <if test="checkInTime != null">
+        #{checkInTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orderState != null">
+        #{orderState,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.dh.hotel.entity.entity.HotelOrder">
+    update hotel_order
+    <set>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="orderNote != null">
+        order_note = #{orderNote,jdbcType=VARCHAR},
+      </if>
+      <if test="createdTime != null">
+        created_time = #{createdTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="roomTypeId != null">
+        room_type_id = #{roomTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="roomId != null">
+        room_id = #{roomId,jdbcType=INTEGER},
+      </if>
+      <if test="checkInTime != null">
+        check_in_time = #{checkInTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orderState != null">
+        order_state = #{orderState,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.dh.hotel.entity.entity.HotelOrder">
+    update hotel_order
+    set user_id = #{userId,jdbcType=INTEGER},
+      order_note = #{orderNote,jdbcType=VARCHAR},
+      created_time = #{createdTime,jdbcType=TIMESTAMP},
+      room_type_id = #{roomTypeId,jdbcType=INTEGER},
+      room_id = #{roomId,jdbcType=INTEGER},
+      check_in_time = #{checkInTime,jdbcType=TIMESTAMP},
+      order_state = #{orderState,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
